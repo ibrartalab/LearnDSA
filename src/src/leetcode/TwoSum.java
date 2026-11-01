@@ -2,6 +2,8 @@ package leetcode;
 
 import algorithms.BubbleSort;
 
+import java.util.HashMap;
+
 public class TwoSum {
     static void main(String[] args) {
         /*
@@ -15,6 +17,7 @@ public class TwoSum {
         int[] nums = {2,15,11,7};
         int target = 18;
         printResult(twoSumBF(nums,target));
+        printResult(twoSumOptimal(nums,target));
         printResult(twoSumSubOptimal(nums,target));
     }
 
@@ -48,7 +51,7 @@ public class TwoSum {
         // then apply binary search
         BubbleSort.sort(nums);
 
-        for(int current=0;current < nums.length;current++){
+        for(int current=0; current < nums.length; current++){
             int left = current + 1;
             int right = nums.length -1;
             int complement = target - nums[current];
@@ -65,6 +68,21 @@ public class TwoSum {
                 }
 
             }
+        }
+        return new int[]{};
+    }
+
+    // 3. Optimal Solution
+    // TimeComplexity is O(n) and SpaceComplexity is O(n)
+    private static int[] twoSumOptimal(int[] nums, int target){
+        HashMap<Integer,Integer> visited = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if(visited.containsKey(complement)){
+                return new int[]{visited.get(complement),i};
+            }
+            visited.put(nums[i],i);
         }
         return new int[]{};
     }
