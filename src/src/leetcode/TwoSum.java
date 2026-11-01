@@ -13,8 +13,8 @@ public class TwoSum {
         You can return the answer in any order.
          */
         int[] nums = {2,15,11,7};
-        int target = 9;
-//        printResult(twoSumBF(nums,target));
+        int target = 18;
+        printResult(twoSumBF(nums,target));
         printResult(twoSumSubOptimal(nums,target));
     }
 
@@ -47,22 +47,26 @@ public class TwoSum {
         // first to sort the Array(nums)
         // then apply binary search
         BubbleSort.sort(nums);
-        int left = 0;
-        int right = nums.length -1;
-        while (left <= right){
-            int mid = left + (right - left) / 2;
 
-            if((nums[left] + nums[right]) == target){
-                return new int[]{nums[left],nums[right]};
-            }else if(mid > target){
-                left = mid -1;
-            } else if (mid < target) {
-                left = mid + 1;
+        for(int current=0;current < nums.length;current++){
+            int left = current + 1;
+            int right = nums.length -1;
+            int complement = target - nums[current];
+
+            while (left <= right){
+                int mid = left + (right - left) / 2;
+
+                if(nums[mid] == complement){
+                    return new int[]{current,mid};
+                }else if(nums[mid] > complement){
+                    right = mid -1;
+                } else if(nums[mid] < complement){
+                    left = mid + 1;
+                }
+
             }
-
         }
         return new int[]{};
-
     }
 
     // This helper method print the result in a structured format
@@ -70,6 +74,7 @@ public class TwoSum {
         for (int i:r){
             System.out.print(i + " ");
         }
+        System.out.println();
     }
 
 }
