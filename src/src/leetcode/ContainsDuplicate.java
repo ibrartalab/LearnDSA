@@ -2,6 +2,9 @@ package leetcode;
 
 import algorithms.InsertionSort;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class ContainsDuplicate {
     static void main(String[] args) {
         /*
@@ -9,8 +12,10 @@ public class ContainsDuplicate {
         Given an integer array nums, return true if any value appears at least twice in the array,
         and return false if every element is distinct.
         */
-        int[] nums = {1,2,3,4};
+        int[] nums = {1,2,3,1};
         System.out.println(checkDuplicate(nums));
+        System.out.println(checkDuplicateOptimal(nums));
+        System.out.println(checkDuplicateSubOptimal(nums));
     }
     // 1. Bruteforce approach
     // TimeComplexity is O(n^2) and SpaceComplexity is O(1)
@@ -36,4 +41,17 @@ public class ContainsDuplicate {
         return false;
     }
 
+    // 2. Optimal approach
+    // TimeComplexity is O(n) and SpaceComplexity is O(n)
+    private static boolean checkDuplicateOptimal(int[] nums){
+        HashSet<Integer> visited = new HashSet<>();
+
+        for (int num:nums) {
+            if(visited.contains(num)){
+                return true;
+            }
+            visited.add(num);
+        }
+        return false;
+    }
 }
