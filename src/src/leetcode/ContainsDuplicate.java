@@ -1,5 +1,7 @@
 package leetcode;
 
+import algorithms.InsertionSort;
+
 public class ContainsDuplicate {
     static void main(String[] args) {
         /*
@@ -7,7 +9,7 @@ public class ContainsDuplicate {
         Given an integer array nums, return true if any value appears at least twice in the array,
         and return false if every element is distinct.
         */
-        int[] nums = {1,1,1,3,3,4,3,2,4,2};
+        int[] nums = {1,2,3,4};
         System.out.println(checkDuplicate(nums));
     }
     // 1. Bruteforce approach
@@ -22,4 +24,16 @@ public class ContainsDuplicate {
         }
         return false;
     }
+
+    // 2. Sub-optimal approach
+    // TimeComplexity is O(n log n) and SpaceComplexity is O(1)
+    private static boolean checkDuplicateSubOptimal(int[] nums){
+        InsertionSort.sort(nums);
+
+        for (int i = 1; i < nums.length; i++) {
+            if(nums[i] == nums[i-1]) return true;
+        }
+        return false;
+    }
+
 }
