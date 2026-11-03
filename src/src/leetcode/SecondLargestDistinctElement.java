@@ -3,6 +3,7 @@ package leetcode;
 public class SecondLargestDistinctElement {
     static void main(String[] args) {
         /*
+        Problem statement: Find the second-largest distinct element
         Given an integer array, find its second-largest distinct element.
         Example:
         nums={10, 5, 20, 8, 20} return 10
