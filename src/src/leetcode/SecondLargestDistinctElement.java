@@ -26,7 +26,9 @@ public class SecondLargestDistinctElement {
         int[] t8 = {7}; // No second-largest distinct element exist
         int[] t9 = {}; // not a valid input
         int[] t10 = {2, 2, 1}; // 1
-        System.out.println(findSecondLargestDistinct(t10));
+        int[] t11 = {Integer.MIN_VALUE,Integer.MAX_VALUE};
+        int[] t12 = {Integer.MIN_VALUE,Integer.MIN_VALUE,0};
+        System.out.println(findSecondLargestDistinct(t12));
     }
 
     private static int findSecondLargestDistinct(int[] nums){
@@ -47,16 +49,16 @@ public class SecondLargestDistinctElement {
         int largest = Integer.MIN_VALUE;
 
         for (int num:nums){
-            if(nums[num] > largest){
+            if(num > largest){
                 secondLargest = largest;
-                largest = nums[num];
-            } else if (nums[num] < largest && (nums[num] > secondLargest || secondLargest == null)) {
-                secondLargest = nums[num];
+                largest = num;
+            } else if (num < largest && (num > secondLargest || secondLargest == null)) {
+                secondLargest = num;
             }
         }
         // in this position if second largest is null, which means all the elements
         // in the array might be same.
-        if(secondLargest == null){
+        if(secondLargest == null || secondLargest == largest){
             throw new IllegalArgumentException("All the array elements are same.");
         }
         // if we found the second largest simply return from here.
