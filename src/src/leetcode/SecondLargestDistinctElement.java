@@ -31,27 +31,35 @@ public class SecondLargestDistinctElement {
 
     private static int findSecondLargestDistinct(int[] nums){
         // Handling all the possible edge cases
+        // If array is null or empty then we have to throw an exception
         if(nums == null || nums.length == 0){
             throw new IllegalArgumentException("Array(nums) can not be null or empty");
         }
+        // if the array has only one element we have to throw an exception
+        // because we must have to have at least two distinct elements inside the array.
         if(nums.length == 1){
             throw new IllegalArgumentException("Array(nums) must have present at least two distinct elements.");
         }
-
-        int secondLargest = Integer.MIN_VALUE;
+        // these are the pointers to track the second largest and largest elements inside the array.
+        // we initialized with null, because if there might be a case the array have infinity min value,
+        // in that case this will help us to check that value as well, instead of throwing an exception.
+        Integer secondLargest = null;
         int largest = Integer.MIN_VALUE;
 
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] > largest){
+        for (int num:nums){
+            if(nums[num] > largest){
                 secondLargest = largest;
-                largest = nums[i];
-            } else if (nums[i] > secondLargest && nums[i] != largest) {
-                secondLargest = nums[i];
+                largest = nums[num];
+            } else if (nums[num] < largest && (nums[num] > secondLargest || secondLargest == null)) {
+                secondLargest = nums[num];
             }
         }
-        if(secondLargest == Integer.MIN_VALUE){
+        // in this position if second largest is null, which means all the elements
+        // in the array might be same.
+        if(secondLargest == null){
             throw new IllegalArgumentException("All the array elements are same.");
         }
+        // if we found the second largest simply return from here.
         return secondLargest;
     }
 }
