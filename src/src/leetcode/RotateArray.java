@@ -24,6 +24,15 @@ public class RotateArray {
     }
 
     private static void rotateArray(int[] nums, int k){
+        // throwing an exception if nums is null or contains zero elements.
+        if(nums == null || nums.length == 0){
+            throw new IllegalArgumentException("Array can't be null or empty");
+        }
+        // throwing an error if k is negative, because the program will be crashed
+        // or the algorithm will behave differently
+        if(k < 0){
+            throw new IllegalArgumentException("k can't be negative");
+        }
         /*
         effectiveK is used to track which k elements we should to bring
         to the front from the end of the array.
@@ -43,8 +52,7 @@ public class RotateArray {
         computation going after this. we do not need to iterate over the array if there is no
         rotation required.
         */
-        if(effectiveK <= 0){
-            System.err.println("We can't rotate the Array.");
+        if(effectiveK == 0){
             return;
         }
         // So to fulfill the requirements we need to split the algorithm into 3
