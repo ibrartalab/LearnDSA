@@ -52,13 +52,9 @@ public class RotateArray {
         // 1. Reverse the original array in-place
         reverse(nums,left,right);
         // 2. Rotate/swap the k elements
-        int m = nums[0];
-        nums[0] = nums[effectiveK - 1];
-        nums[effectiveK - 1] = m;
+        reverse(nums,0,effectiveK-1);
         // 3. Rotate/swap the rest part of the array.
-        int j = nums[effectiveK];
-        nums[effectiveK] = nums[nums.length - 1];
-        nums[nums.length - 1] = j;
+        reverse(nums,effectiveK,nums.length - 1);
     }
 
     // this is a helper method to reverse the array, which will helps us to maintain
