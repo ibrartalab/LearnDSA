@@ -16,7 +16,7 @@ public class RotateArray {
         3. Aim for O(n) time and O(1) auxiliary space.
          */
         int[] nums = {1, 2, 3, 4, 5};
-        int k = 10;
+        int k = 7;
         rotateArray(nums,k);
         for (int n:nums){
             System.out.print(n + " ");
@@ -50,14 +50,7 @@ public class RotateArray {
         // So to fulfill the requirements we need to split the algorithm into 3
         // distinct steps.
         // 1. Reverse the original array in-place
-        while (left <= right){
-            int temp = nums[left];
-            nums[left] = nums[right];
-            nums[right] = temp;
-
-            left++;
-            right--;
-        }
+        reverse(nums,left,right);
         // 2. Rotate/swap the k elements
         int m = nums[0];
         nums[0] = nums[effectiveK - 1];
@@ -66,5 +59,18 @@ public class RotateArray {
         int j = nums[effectiveK];
         nums[effectiveK] = nums[nums.length - 1];
         nums[nums.length - 1] = j;
+    }
+
+    // this is a helper method to reverse the array, which will helps us to maintain
+    // the original order of the rest of the elements in the main logic
+    private static void reverse(int[] nums, int left, int right){
+        while (left <= right){
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+
+            left++;
+            right--;
+        }
     }
 }
