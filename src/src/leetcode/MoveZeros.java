@@ -23,26 +23,37 @@ public class MoveZeros {
         int[] t9 = {0}; // 0
         int[] t10 = {5}; // 5
         int[] t11 = {}; // Not a valid input
-//        moveZerosToEnd(nums);
-        moveZerosToEndOptimal(t11);
+        int[] t12 = {1,0,2}; // 1, 2, 0
+//        moveZerosToEnd(t3);
+//        moveZerosToEndOptimal(t3);
     }
     // 1. Bruteforce approach
     // time complexity O(n^2) and space O(1)
     private static void moveZerosToEnd(int[] nums){
+        // We used the java one of the feature called labels.
+        // Labels are useful to give names to our individual loop, so that
+        // we can easily determine which loop we are referring to.
+        Outer:
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) {
-                if(nums[i] == 0 && nums[j] != 0){
-                    int temp = nums[j];
-                    nums[j] = nums[i];
-                    nums[i] = temp;
+            Inner:
+            if(nums[i] == 0){
+                for (int j = i+1; j < nums.length; j++) {
+                    if(nums[j] != 0){
+                        int temp = nums[j];
+                        nums[j] = nums[i];
+                        nums[i] = temp;
+                        break Inner;
+                    }
                 }
             }
+
         }
+        printElements(nums);
     }
 
     // 2. Optimal approach: using two pointers-same direction
     // time complexity O(n) ans space O(1)
-    private static void moveZerosToEndOptimal(int[] nums){
+    private static void moveZerosToEndOptimal2(int[] nums){
         // Handling some edge cases
         if(nums == null || nums.length == 0){
             throw new IllegalArgumentException("Array can't be null or empty");
@@ -51,11 +62,10 @@ public class MoveZeros {
         int left = 0;
         int right = 0;
         while (right < nums.length){
-            if(nums[right] != 0 && nums[left] == 0){
-                nums[left] = nums[right];
-                nums[right] = 0;
-                left++;
-            } else if (nums[right] < 0 && left == 0) {
+            if(nums[right] != 0){
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
                 left++;
             }
             right++;
