@@ -1,6 +1,6 @@
 package datastructures;
 
-public class Test {
+public class TestMyHashMap {
     static void main(String[] args) {
         // testing MyHashMap datastructure with multiple conditions
         MyHashMap map = new MyHashMap();
