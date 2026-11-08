@@ -37,16 +37,16 @@ public class MyHashMap {
         // now to check either this currentNode has data or not
         // if currentNode is not null, which means in this particular bucket
         // a Node or Nodes of LinkedList available.
-        if (currentNode != null){
-            // if the key provided is matching with the key of the
-            // currentNode, then we can simply update the value and return from here.
-            if(currentNode.key == key){
-                currentNode.value = value;
-                return;
-            }
-            // if the current bucket has more than one Nodes and the first one
-            // has not matched the key then move to the next Node
-            currentNode = currentNode.next;
+        while(currentNode != null){
+                // if the key provided is matching with the key of the
+                // currentNode, then we can simply update the value and return from here.
+                if(currentNode.key == key){
+                    currentNode.value = value;
+                    return;
+                }
+                // if the current bucket has more than one Nodes and the first one
+                // has not matched the key then move to the next Node
+                currentNode = currentNode.next;
         }
         // else we can simply create a new Node
         Node newNode = new Node(key,value);
@@ -55,4 +55,22 @@ public class MyHashMap {
         // increment the size of the buckets array
         size++;
     }
+    // this metho is useful to get the value for the given key
+    // if the provided key has a mapping in the Map, so return the value of it.
+    public Integer get(int key){
+        // first we need to get the appropriate index through the hash method
+        int index = hash(key);
+        // get the currentNode using this index
+        Node currentNode = buckets[index];
+        // now check if the currentNode is not null and the currentNode.key is matched to
+        // provided key
+        while (currentNode != null){
+            if(currentNode.equals(key)){
+                return currentNode.value;
+            }
+            currentNode = currentNode.next;
+        }
+        return null;
+    }
+    // this method will delete the key from the map and its associated value.
 }
