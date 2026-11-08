@@ -73,4 +73,22 @@ public class MyHashMap {
         return null;
     }
     // this method will delete the key from the map and its associated value.
+    public void remove(int key){
+        // first we need to get the appropriate index through the hash method
+        int index = hash(key);
+        Node currentNode = buckets[index];
+        Node previousNode = null;
+        while (currentNode != null){
+            if(currentNode.equals(key)){
+                currentNode.next = buckets[index];
+            }else{
+                previousNode.next = currentNode.next;
+            }
+            currentNode = currentNode.next;
+        }
+    }
+    // get the size of your Map
+    public int size(){
+        return this.size;
+    }
 }
