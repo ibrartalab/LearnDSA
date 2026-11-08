@@ -65,7 +65,7 @@ public class MyHashMap {
         // now check if the currentNode is not null and the currentNode.key is matched to
         // provided key
         while (currentNode != null){
-            if(currentNode.equals(key)){
+            if(currentNode.key == key){
                 return currentNode.value;
             }
             currentNode = currentNode.next;
@@ -76,14 +76,25 @@ public class MyHashMap {
     public void remove(int key){
         // first we need to get the appropriate index through the hash method
         int index = hash(key);
+        // get the currentNode using the index in the buckets
         Node currentNode = buckets[index];
+        // keep track of the previousNode
         Node previousNode = null;
+        // now check if the currentNode is not null and the currentNode.key is matched to
+        // provided key and also if the previousNode is null, which means we have to remove
+        // the head Node, else we can look for that specific Node in the linkedList and remove.
         while (currentNode != null){
-            if(currentNode.equals(key)){
-                currentNode.next = buckets[index];
-            }else{
-                previousNode.next = currentNode.next;
+            if(currentNode.key == key){
+                if(previousNode == null){
+                    buckets[index] = currentNode.next;
+                }else{
+                    previousNode.next = currentNode.next;
+                }
+                // decrement the bucket size, and return from here
+                size--;
+                return;
             }
+            previousNode = currentNode;
             currentNode = currentNode.next;
         }
     }
