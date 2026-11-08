@@ -1,12 +1,12 @@
 package datastructures;
 
-import java.util.HashMap;
-
 public class MyHashMap {
     // this array buckets will contain all the nodes for this Map.
-    private final Node[] buckets;
+    private Node[] buckets;
     // this is the size of the Map, initially its 0
     private int size;
+    // the thresholder for the buckets array for resizing
+    private static final double MAX_LOAD_FACTOR = 0.75;
 
     public MyHashMap(){
         buckets = new Node[10];
@@ -48,6 +48,10 @@ public class MyHashMap {
                 // has not matched the key then move to the next Node
                 currentNode = currentNode.next;
         }
+        // resizing if the current insertion cross the max capacity threshold.
+        resize();
+        // recalculating the index, in case capacity has changed
+        index = hash(key);
         // else we can simply create a new Node
         Node newNode = new Node(key,value);
         newNode.next = buckets[index];
@@ -101,5 +105,41 @@ public class MyHashMap {
     // get the size of your Map
     public int size(){
         return this.size;
+    }
+    // resize the buckets array if it's reached to the max threshold
+    private void resize(){
+        // calculate load factor against the current threshold
+        double loadFac = (double) (this.size + 1) / buckets.length;
+        // make a copy of the original/old buckets
+        Node[] oldBuckets = buckets;
+        // check if load factor exceed the limit then double the capacity
+        // resize the buckets and call the rehash method to rehash all the
+        // entries in the old buckets
+        if(loadFac > MAX_LOAD_FACTOR){
+            buckets = new Node[oldBuckets.length * 2];
+            rehash(oldBuckets);
+        }
+    }
+
+    private void rehash(Node[] oldBuckets){
+        // iterate over the oldBuckets
+        for (Node head:oldBuckets){
+            // start with from the head Node
+            Node currentNode = head;
+            // check whether It's null or not
+            while (currentNode != null){
+                // if currentNode is not null, then hold the immediate
+                // next Node pointer at this point, because later we have to change/update
+                // currentNode
+                Node nextNode = currentNode.next;
+                // calculate the new hash index
+                int index = hash(currentNode.key);
+                // insert the existing Nodes into the new upgraded buckets
+                currentNode.next = buckets[index];
+                buckets[index] = currentNode;
+                // continue to the linkedList for the remaining Nodes
+                currentNode = nextNode;
+            }
+        }
     }
 }
