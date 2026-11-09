@@ -43,7 +43,7 @@ public class MyHashMap<K,V> {
         while(currentNode != null){
                 // if the key provided is matching with the key of the
                 // currentNode, then we can simply update the value and return from here.
-                if(currentNode.key == key){
+                if(Objects.equals(currentNode.key,key)){
                     currentNode.value = value;
                     return;
                 }
