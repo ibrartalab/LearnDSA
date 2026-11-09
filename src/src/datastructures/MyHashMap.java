@@ -93,6 +93,19 @@ public class MyHashMap<K,V> {
         }
         return false;
     }
+    // check whether the map contains a specific value
+    public boolean containsValue(V value){
+        for (MyHashMap.Node<K,V> head: buckets){
+            MyHashMap.Node<K,V> currentNode = head;
+            while (currentNode != null){
+                if(Objects.equals(currentNode.value,value)){
+                    return true;
+                }
+                currentNode = currentNode.next;
+            }
+        }
+        return false;
+    }
     // this method will delete the key from the map and its associated value.
     public void remove(K key){
         // first we need to get the appropriate index through the hash method
