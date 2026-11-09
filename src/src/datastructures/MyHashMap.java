@@ -76,6 +76,20 @@ public class MyHashMap {
         }
         return null;
     }
+    // get the key of the specific Node
+    public boolean containsKey(int key){
+        // first we need to get the appropriate index through the hash method
+        int index = hash(key);
+        // get the currentNode using this index
+        Node currentNode = buckets[index];
+        while (currentNode != null){
+            if(currentNode.key == key){
+                return true;
+            }
+            currentNode = currentNode.next;
+        }
+        return false;
+    }
     // this method will delete the key from the map and its associated value.
     public void remove(int key){
         // first we need to get the appropriate index through the hash method
@@ -120,7 +134,8 @@ public class MyHashMap {
             rehash(oldBuckets);
         }
     }
-
+    // this method is the brain for this data structure, which will takes all the elements from
+    // the oldBuckets into the newly resized buckets
     private void rehash(Node[] oldBuckets){
         // iterate over the oldBuckets
         for (Node head:oldBuckets){
