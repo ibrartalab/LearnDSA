@@ -7,10 +7,28 @@ public class MaximumSumSubarray {
         Given an integer array and an integer k, return the maximum sum of any contiguous subarray
         containing exactly k elements.
          */
-        int[] nums = {2, 1, 5, 1, 3, 2};
+        int[] t1 = {2, 1, 5, 1, 3, 2};
+        int[] t2 = {1,5,4,2,9,9,9};
         int k = 3;
-        System.out.println(maxSum(nums,k));
+        System.out.println(maxSum(t1,k));
+        maxSumBF(t1,k);
     }
+    // Bruteforce approach
+    private static void maxSumBF(int[] nums,int k){
+        int currentSum = 0;
+        int maxSum = currentSum;
+        for (int i = 0; i < nums.length; i++) {
+            if(k + i <= nums.length){
+                currentSum -= currentSum;
+                for (int j = i; j < k + i; j++) {
+                    currentSum += nums[j];
+                }
+            }
+            maxSum = Math.max(maxSum,currentSum);
+        }
+        System.out.println(maxSum);
+    }
+    // Optimal approach
     private static int maxSum(int[] nums,int k){
         if(nums == null || k <= 0 || k > nums.length ){
             throw new IllegalArgumentException("Invalid input");
