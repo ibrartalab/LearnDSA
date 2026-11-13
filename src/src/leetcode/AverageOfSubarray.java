@@ -9,7 +9,7 @@ public class AverageOfSubarray {
          */
         int[] nums = {1, 3, 2, 6, -1, 4, 1, 8, 2};
         int k = 5;
-        double[] result = averageSubarrayOptimal(nums,k);
+        double[] result = averageSubarrayOptimal2(nums,k);
         for (double re:result){
             System.out.print(re + " "); // 2.2 2.8 2.4 3.6 2.8
         }
@@ -36,7 +36,6 @@ public class AverageOfSubarray {
         double sum = 0;
 
         for (int i = 0; i <= nums.length; i++) {
-
             if(i >= k){
                 if(i-k <= averages.length){
                     double average = sum/k;
@@ -47,9 +46,22 @@ public class AverageOfSubarray {
             if(i <= nums.length -1){
                 sum += nums[i];
             }
-
         }
-        System.out.println(sum);
+        return averages;
+    }
+    // Optimal solution-2
+    private static double[] averageSubarrayOptimal2(int[] nums,int k){
+        double[] averages = new double[nums.length - k + 1];
+        double sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        averages[0] = sum/k;
+        for (int i = k; i < nums.length; i++) {
+            sum -= nums[i-k];
+            sum += nums[i];
+            averages[i-k+1] = sum/k;
+        }
         return averages;
     }
 }
