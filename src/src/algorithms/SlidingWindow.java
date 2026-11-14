@@ -31,6 +31,11 @@ public class SlidingWindow {
         int k = 3;
         int result = maxSumSubarray(nums,k);
         System.out.println(result);
+        // Given an Integers array and an Integer target.
+        // Find the minimum length of a contiguous subarray whose sum is greater than or equal to the target.
+        int[] nums2 = {2, 1, 5, 2, 3, 2};
+        int target = 7;
+        System.out.println(minLengthSubarray(nums2,target));
     }
     // Fixed-Size Sliding Window
     private static int maxSumSubarray(int[] nums, int k) {
@@ -48,5 +53,29 @@ public class SlidingWindow {
             maxSum = Math.max(maxSum, windowSum);
         }
         return maxSum;
+    }
+    // Variable size window
+    private static int minLengthSubarray(int[] nums,int target){
+        // input validation
+        if (nums == null || target <= 0) {
+            throw new IllegalArgumentException("Invalid input");
+        }
+        // set initials states
+        int left = 0;
+        int windowSum = 0;
+        int minLength = Integer.MAX_VALUE;
+
+        for (int right= 0; right < nums.length; right++) {
+            windowSum += nums[right];
+
+            while (windowSum >= target){
+                int currentLength = right - left + 1;
+                minLength = Math.min(minLength,currentLength);
+                windowSum -= nums[left];
+                left++;
+            }
+        }
+        return minLength == Integer.MAX_VALUE ? 0 : minLength;
+
     }
 }
