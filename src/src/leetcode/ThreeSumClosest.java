@@ -1,6 +1,8 @@
 package leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ThreeSumClosest {
     static void main(String[] args) {
@@ -23,7 +25,7 @@ public class ThreeSumClosest {
     private static int findClosestSum(int[] nums,int target){
         Arrays.sort(nums);
         int bestSum = nums[0]+nums[1]+nums[2];
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length-2; i++) {
             int left = i+1;
             int right = nums.length-1;
             while (left < right){
