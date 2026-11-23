@@ -28,4 +28,24 @@ public class BubbleSort {
             }
         }
     }
+    // to avoid unnecessary traversing over the already sorted array
+    // we should use this once isSwapped condition to terminate the
+    // loop on right time. In this prevent the unnecessary iteration
+    // which reduce the times complexity to O(n) if the array is already sorted.
+    private static void sortOptimized(int[] nums){
+        for (int i = 0; i < nums.length-1; i++) {
+            boolean isSwapped = false;
+            for (int j = 0; j < nums.length-1-i; j++) {
+                if(nums[j] > nums[j+1]){
+                    int temp = nums[j];
+                    nums[j] = nums[j+1];
+                    nums[j+1] = temp;
+                    isSwapped = true;
+                }
+            }
+            if(!isSwapped){
+                break;
+            }
+        }
+    }
 }
