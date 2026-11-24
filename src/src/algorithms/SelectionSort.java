@@ -14,19 +14,26 @@ public class SelectionSort {
 
     public static void sort(int[] nums){
         // The outer loop will keep track of the sorted part
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < nums.length-1; i++) {
             // minIndex is pointing to the min value in the Array
             int minIndex = i;
+            // The inner loop will find the min value in the unsorted part
+            // of the array. And if we found any element less than nums[minIndex]
+            // update minIndex with that position
             for (int j = i+1; j < nums.length; j++) {
                 if(nums[j] < nums[minIndex]){
                     minIndex = j;
                 }
             }
-            // After found the most min value from the Array
-            // then we will swap it to the i-th position
-            int temp = nums[i];
-            nums[i] = nums[minIndex];
-            nums[minIndex] = temp;
+            // If the element at nums[minIndex] is already in its correct place
+            // then we don't need unnecessary swapping
+            if(minIndex != i){
+                // After found the most min value from the Array
+                // then we will swap it to the i-th position
+                int temp = nums[i];
+                nums[i] = nums[minIndex];
+                nums[minIndex] = temp;
+            }
         }
     }
 }
