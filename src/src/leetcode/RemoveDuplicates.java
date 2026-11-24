@@ -34,17 +34,18 @@ public class RemoveDuplicates {
         int[] n1 = {0,0,1,1,1,2,2,3,3,4};
         int[] n2 = {1,2,2};
         int[] n3 = {1,1,2,3};
-        System.out.println(removeDuplicates(n1));
+        System.out.println(removeDuplicates2(n1));
         print(n1);
-        System.out.println(removeDuplicates(n2));
+        System.out.println(removeDuplicates2(n2));
         print(n2);
-        System.out.println(removeDuplicates(n3));
+        System.out.println(removeDuplicates2(n3));
         print(n3);
     }
     private static void print(int[] nums){
         for (int n:nums) System.out.print(n + " ");
         System.out.println();
     }
+
     private static int removeDuplicates(int[] nums) {
         int k = nums.length;
         int left = 0;
@@ -65,5 +66,15 @@ public class RemoveDuplicates {
             }
         }
         return k;
+    }
+    private static int removeDuplicates2(int[] nums){
+        int left = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if(nums[i] != nums[left]){
+                left++;
+                nums[left] = nums[i];
+            }
+        }
+        return left+1;
     }
 }
