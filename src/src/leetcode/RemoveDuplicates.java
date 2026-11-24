@@ -31,38 +31,39 @@ public class RemoveDuplicates {
         Explanation: Your function should return k = 2, with the first two elements of nums being 1 and 2 respectively.
         It does not matter what you leave beyond the returned k (hence they are underscores).
          */
-        System.out.println(removeDuplicates(new int[]{1,2,2}));
+        int[] n1 = {0,0,1,1,1,2,2,3,3,4};
+        int[] n2 = {1,2,2};
+        int[] n3 = {1,1,2,3};
+        System.out.println(removeDuplicates(n1));
+        print(n1);
+        System.out.println(removeDuplicates(n2));
+        print(n2);
+        System.out.println(removeDuplicates(n3));
+        print(n3);
+    }
+    private static void print(int[] nums){
+        for (int n:nums) System.out.print(n + " ");
+        System.out.println();
     }
     private static int removeDuplicates(int[] nums) {
-        HashSet<Integer> set = new HashSet<>();
-        int k = 0;
+        int k = nums.length;
         int left = 0;
         int right = 0;
-        while (right < nums.length){
-            if(set.contains(nums[right]) && left < right){
-                int temp = nums[left];
-                nums[left] = nums[right];
-                nums[right] = temp;
-                while (left > 0 && nums[left] < nums[left-1]){
-                    int t = nums[left];
-                    nums[left] = nums[left-1];
-                    nums[left-1] = t;
-                }
+        while (right < nums.length-1){
+            if(nums[right] != nums[right+1]){
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
                 left++;
-
             }else{
-                set.add(nums[right]);
-                k += 1;
-                right++;
+                k -= 1;
+            }
+            right++;
+
+            if(right == nums.length-1){
+                nums[left] = nums[right];
             }
         }
-        for (int i = 0; i < set.size()-1-i; i++) {
-            if(nums[i] > nums[i+1]){
-                int temp = nums[i];
-                nums[i] = nums[i+1];
-                nums[i+1] = temp;
-            }
-        }
-        return set.size();
+        return k;
     }
 }
