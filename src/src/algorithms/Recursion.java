@@ -21,6 +21,7 @@ public class Recursion {
         System.out.println(factorial(5)); // 120
         printElements(new int[]{1,2,3,4,5},-2); // 12345
         System.out.println(sumOfElements(new int[]{1,2,3,4,5},0)); // 15
+        System.out.println(findMaxElement(new int[]{100,2,14,8,58},0)); // 14
     }
     // print number from n-1
     private static void printAsc(int n){
@@ -63,5 +64,20 @@ public class Recursion {
         if(index < 0 || index == nums.length) return 0;
         // recursive case and work done
         return nums[index] + sumOfElements(nums,index+1);
+    }
+    // find max element in an array
+    private static int findMaxElement(int[] nums,int index){
+        // input validations
+        if(nums == null || nums.length == 0){
+            throw new IllegalArgumentException("Array(nums) can not be null or empty");
+        }
+        if(index < 0 || index >= nums.length){
+            throw new IllegalArgumentException("Invalid index");
+        }
+        // base case
+        if(index == nums.length-1) return nums[index];
+        // find the max element in the remaining array
+        int maxElement = findMaxElement(nums,index+1);
+        return Math.max(nums[index],maxElement);
     }
 }
