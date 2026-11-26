@@ -21,19 +21,19 @@ public class Recursion {
     }
     // print number from n-1
     private static void printAsc(int n){
-        if(n == 0) return;
-        printAsc(n-1);
-        System.out.println(n);
+        if(n == 0) return; // base case
+        printAsc(n-1); // recursive case
+        System.out.println(n); // work do to
     }
     // print number from n-1 in descending order
     private static void printDesc(int n){
-        if (n == 0) return;
-        System.out.println(n);
-        printDesc(n-1);
+        if (n == 0) return; // base case
+        System.out.println(n); // work to do
+        printDesc(n-1); // recursive case
     }
     // return sum of the numbers from n-1
     private static int sum(int n){
-        if (n == 0) return 0;
-        return n + sum(n-1);
+        if (n == 0) return 0; // base case
+        return n + sum(n-1); // recursive case and work done
     }
 }
