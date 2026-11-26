@@ -19,6 +19,8 @@ public class Recursion {
         printDesc(5); // 54321
         System.out.println(sum(5)); // 15
         System.out.println(factorial(5)); // 120
+        printElements(new int[]{1,2,3,4,5},-2); // 12345
+        System.out.println(sumOfElements(new int[]{1,2,3,4,5},0)); // 15
     }
     // print number from n-1
     private static void printAsc(int n){
@@ -41,5 +43,25 @@ public class Recursion {
     private static int factorial(int n){
         if (n == 0) return 1; // base case: for factorial(0) is 1
         return n * factorial(n-1);
+    }
+    // print elements of an array
+    private static void printElements(int[] nums,int index){
+        // input validations
+        if(nums == null) throw new IllegalArgumentException("Array(nums) can not be null");
+        // base case
+        if(index < 0 || index == nums.length) return;
+        // work to do
+        System.out.print(nums[index] + " ");
+        // recursive case
+        printElements(nums,index+1);
+    }
+    // return the sum of all the elements in the array
+    private static int sumOfElements(int[] nums,int index){
+        // input validations
+        if(nums == null) throw new IllegalArgumentException("Array(nums) can not be null");
+        // base case
+        if(index < 0 || index == nums.length) return 0;
+        // recursive case and work done
+        return nums[index] + sumOfElements(nums,index+1);
     }
 }
