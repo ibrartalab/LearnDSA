@@ -16,11 +16,18 @@ public class Recursion {
         there is might be a third part of the recursion where we do all the work.
          */
         printAsc(5);
+        printDesc(5);
     }
     // print number from n-1
     private static void printAsc(int n){
         if(n == 0) return;
         printAsc(n-1);
         System.out.println(n);
+    }
+    // print number from n-1 in descending order
+    private static void printDesc(int n){
+        if (n == 0) return;
+        System.out.println(n);
+        printDesc(n-1);
     }
 }
