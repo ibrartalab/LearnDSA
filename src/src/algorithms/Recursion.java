@@ -18,6 +18,7 @@ public class Recursion {
         printAsc(5); // 12345
         printDesc(5); // 54321
         System.out.println(sum(5)); // 15
+        System.out.println(factorial(5)); // 120
     }
     // print number from n-1
     private static void printAsc(int n){
@@ -35,5 +36,10 @@ public class Recursion {
     private static int sum(int n){
         if (n == 0) return 0; // base case
         return n + sum(n-1); // recursive case and work done
+    }
+    // return factorial of number n
+    private static int factorial(int n){
+        if (n == 0) return 1; // base case: for factorial(0) is 1
+        return n * factorial(n-1);
     }
 }
