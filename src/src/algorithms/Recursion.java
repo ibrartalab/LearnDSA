@@ -15,8 +15,9 @@ public class Recursion {
         2. Recursive case: where the method call itself for going deeper.
         there is might be a third part of the recursion where we do all the work.
          */
-        printAsc(5);
-        printDesc(5);
+        printAsc(5); // 12345
+        printDesc(5); // 54321
+        System.out.println(sum(5)); // 15
     }
     // print number from n-1
     private static void printAsc(int n){
@@ -29,5 +30,10 @@ public class Recursion {
         if (n == 0) return;
         System.out.println(n);
         printDesc(n-1);
+    }
+    // return sum of the numbers from n-1
+    private static int sum(int n){
+        if (n == 0) return 0;
+        return n + sum(n-1);
     }
 }
